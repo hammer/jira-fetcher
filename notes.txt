@@ -1,0 +1,26 @@
+# CREATE TABLE fixed_issues (project text, id int, key text, assignee text, reporter text, created date, updated date);
+# CREATE TABLE contributors (asf_name text, asf_fullname text, asf_email text, asf_email_domain text);
+
+# Unique contributors: SELECT COUNT(assignee), COUNT(DISTINCT assignee) FROM fixed_issues;
+# Unique contributors per project: SELECT project, COUNT(assignee) total_issues, COUNT(DISTINCT assignee) unique_contributors FROM fixed_issues GROUP BY project;
+
+# TODO(hammer): Deal with fetch errors
+# TODO(hammer): Get watcher information for JIRA tickets
+# TODO(hammer): Standardize the execution of derivative fetches (like the user and watcher fetches)
+
+# ETL evolution
+# 1. copy and paste
+# 2. source-specific, single step
+# 3. source-specific, multiple steps
+# 4. source-agnostic
+# 5. parallel: E, T, then L; or all the way through?
+# 6. fault-tolerant
+# 7. configuration-driven
+# 8. control flow
+# Fetch in bulk versus fetch by single row
+# Source perspective or sink perspective
+
+# Role of ORM?
+# Sources: API, web scraping, documents, databases, logfiles
+# Handle escaping in database (let psycopg2 do it for you!)
+# Limitations of sources (e.g. rate limiting by a web service; heavy production workload for OLTP database; result set limitations)
