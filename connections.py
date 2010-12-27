@@ -56,6 +56,14 @@ class PostgreSQLConnection(object):
     if not self._conn:
       self._conn = psycopg2.connect("dbname=jira_fetcher user=hammer")
     return self._conn
+
+  @staticmethod
+  def make_connection_from_config(name):
+    config = ConfigParser.ConfigParser()
+    config.readfp(open(os.path.expanduser('~/.jira_fetcher')))
+
+    return PostgreSQLConnection(config.get(name, 'db'),
+                          config.get(name, 'username'))
   
   def execute_sql(self, sql, params=None):
     cur = self.conn.cursor()

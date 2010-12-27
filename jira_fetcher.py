@@ -75,7 +75,7 @@ def fetch_fixed_issues():
   start_date = '2010-10-01'
   asf_jira = JiraConnection.make_connection_from_config('ASF')
   cloudera_jira = JiraConnection.make_connection_from_config('CLOUDERA')
-  output_db = PostgreSQLConnection('jira_fetcher', 'hammer')
+  output_db = PostgreSQLConnection.make_connection_from_config('POSTGRESQL')
 
   sources = [FilterSource(asf_jira, 'Avro', 12315050),
              FilterSource(asf_jira, 'Hadoop', 12315051),
@@ -118,7 +118,7 @@ def fetch_fixed_issues():
 def fetch_users():
   # Setup
   asf_jira = JiraConnection.make_connection_from_config('ASF')
-  db_conn = PostgreSQLConnection('jira_fetcher', 'hammer')
+  db_conn = PostgreSQLConnection.make_connection_from_config('POSTGRESQL')
   asf_usernames = [row[0] for row in db_conn.fetch_sql('SELECT DISTINCT(assignee) FROM fixed_issues;')]
   
   for name in asf_usernames:

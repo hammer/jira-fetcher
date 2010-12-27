@@ -7,7 +7,7 @@ from connections import PostgreSQLConnection
 
 # single row
 def get_unique_contributors():
-  db_conn = PostgreSQLConnection('jira_fetcher', 'hammer')
+  db_conn = PostgreSQLConnection.make_connection_from_config('POSTGRESQL')
   sql = "SELECT COUNT(assignee), COUNT(DISTINCT assignee) FROM fixed_issues WHERE updated >= '2010-10-01';"
   results = db_conn.fetch_sql(sql)
   db_conn.close()
@@ -15,14 +15,14 @@ def get_unique_contributors():
 
 # multiple rows
 def get_unique_contributors_per_project():
-  db_conn = PostgreSQLConnection('jira_fetcher', 'hammer')
+  db_conn = PostgreSQLConnection.make_connection_from_config('POSTGRESQL')
   sql = "SELECT project, COUNT(assignee) total_issues, COUNT(DISTINCT assignee) unique_contributors FROM fixed_issues WHERE updated >= '2010-10-01' GROUP BY project;"
   results = db_conn.fetch_sql(sql)
   db_conn.close()
   return results
 
 def get_fixed_issues():
-  db_conn = PostgreSQLConnection('jira_fetcher', 'hammer')
+  db_conn = PostgreSQLConnection.make_connection_from_config('POSTGRESQL')
   sql = "SELECT project, key, assignee, updated FROM fixed_issues WHERE updated >= '2010-10-01';"
   results = db_conn.fetch_sql(sql)
   db_conn.close()
