@@ -3,6 +3,10 @@ $(document).ready(function() {
     "bPaginate": false,
     "bLengthChange": false,
     "bFilter": false});
+  $('#contributors_by_organization_table').dataTable({
+    "bPaginate": false,
+    "bLengthChange": false,
+    "bFilter": false});
   $('#fixed_issues_table').dataTable({
     "bPaginate": false,
     "bLengthChange": false,

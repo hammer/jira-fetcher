@@ -54,6 +54,23 @@
         </tbody>
       </table>
 
+      <h3>Contributors by Organization</h3>
+      <table id="contributors_by_organization_table">
+        <thead>
+        <tr>
+          <th>Project</th>
+          <th>Organization</th>
+          <th>Total Issues Fixed</th>
+          <th>Unique Contributors</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for row in contributors_by_organization %}
+        <tr><td>{{ row[0] }}</td><td>{{ row[1] }}</td><td>{{ row[2] }}</td><td>{{ row[3] }}</td></tr>
+        {% end %}
+        </tbody>
+      </table>
+
       <h3>Fixed Issues</h3>
       <table id="fixed_issues_table">
         <thead>

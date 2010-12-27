@@ -28,6 +28,13 @@ def get_fixed_issues():
   db_conn.close()
   return results
 
+def get_contributors_by_organization():
+  db_conn = PostgreSQLConnection.make_connection_from_config('POSTGRESQL')
+  sql = "SELECT a.project, b.organization, COUNT(*), COUNT(DISTINCT a.assignee) FROM fixed_issues a, contributors b WHERE a.assignee = b.asf_name AND updated >= '2010-10-01' GROUP BY a.project, b.organization ORDER BY a.project;"
+  results = db_conn.fetch_sql(sql)
+  db_conn.close()
+  return results
+
 class Application(tornado.web.Application):
   def __init__(self):
     handlers = [
@@ -44,10 +51,12 @@ class MainHandler(tornado.web.RequestHandler):
     unique_contributors = get_unique_contributors()
     unique_contributors_per_project = get_unique_contributors_per_project()
     fixed_issues = get_fixed_issues()
+    contributors_by_organization = get_contributors_by_organization()
     self.render("index.html",
                 unique_contributors=unique_contributors,
                 unique_contributors_per_project=unique_contributors_per_project,
-                fixed_issues=fixed_issues)
+                fixed_issues=fixed_issues,
+                contributors_by_organization=contributors_by_organization)
 
 def main():
   http_server = tornado.httpserver.HTTPServer(Application())
