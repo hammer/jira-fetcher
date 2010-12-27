@@ -28,6 +28,8 @@
 # Add organizations
 ALTER TABLE contributors ADD COLUMN organization text;
 UPDATE contributors SET organization = 'Yahoo!' WHERE asf_email_domain = 'yahoo-inc.com';
+UPDATE contributors SET organization = 'Yahoo!' WHERE asf_name IN ('chris.douglas', 'owen.omalley', 'sureshms', 'gkesavan', 'mahadev', 'ashutoshc');
 UPDATE contributors SET organization = 'Facebook' WHERE asf_email_domain = 'facebook.com' OR asf_email_domain = 'fb.com';
+UPDATE contributors SET organization = 'Facebook' WHERE asf_name IN ('rvadali', 'kannanm', 'jsensarma', 'he yongqiang', 'hairong', 'dhruba', 'dms');
 UPDATE contributors SET organization = 'Cloudera' WHERE asf_email_domain = 'cloudera.com';
-
+UPDATE contributors SET organization = 'Cloudera' WHERE asf_name IN ('cutting', 'alexvk', 'larsgeorge', 'cos', 'phunt', 'patrickangeles');
