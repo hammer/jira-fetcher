@@ -5,8 +5,10 @@
   <!--[if lt IE 8]><link rel="stylesheet" href="{{ static_url("css/blueprint/ie.css") }}" type="text/css" media="screen, projection"><![endif]-->
   <script type="text/javascript" src="{{ static_url("js/jquery-1.4.2.min.js") }}"></script>
   <script type="text/javascript" src="{{ static_url("js/jquery.tipsy.js") }}"></script>
+  <script type="text/javascript" src="{{ static_url("js/jquery.dataTables.min.js") }}"></script>
   <script type="text/javascript" src="{{ static_url("js/protovis-d3.2.js") }}"></script
   <script type="text/javascript" src="{{ static_url("js/pv.tipsy.js") }}"></script>
+  <script type="text/javascript" src="{{ static_url("js/dashboard.js") }}"></script>
   <link href="{{ static_url("css/tipsy.css") }}" type="text/css" rel="stylesheet"/>
   <link rel="stylesheet" href="{{ static_url("css/dashboard.css") }}" type="text/css">
 </head>
@@ -37,15 +39,36 @@
       </table>
 
       <h3>Unique Contributors Per Component</h3>
-      <table>
+      <table id="unique_contributors_per_project_table">
+        <thead>
         <tr>
           <th>Project</th>
           <th>Total Issues Fixed</th>
           <th>Unique Contributors</th>
         </tr>
+        </thead>
+        <tbody>
         {% for row in unique_contributors_per_project %}
         <tr><td>{{ row[0] }}</td><td>{{ row[1] }}</td><td>{{ row[2] }}</td></tr>
         {% end %}
+        </tbody>
+      </table>
+
+      <h3>Fixed Issues</h3>
+      <table id="fixed_issues_table">
+        <thead>
+        <tr>
+          <th>Project</th>
+          <th>Key</th>
+          <th>Assignee</th>
+          <th>Updated</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for row in fixed_issues %}
+        <tr><td>{{ row[0] }}</td><td>{{ row[1] }}</td><td>{{ row[2] }}</td><td>{{ row[3] }}</td></tr>
+        {% end %}
+        </tbody>
       </table>
     </div>
 
