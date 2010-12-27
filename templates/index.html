@@ -1,0 +1,53 @@
+<html>
+<head>
+  <link rel="stylesheet" href="{{ static_url("css/blueprint/screen.css") }}" type="text/css" media="screen, projection">
+  <link rel="stylesheet" href="{{ static_url("css/blueprint/print.css") }}" type="text/css" media="print">
+  <!--[if lt IE 8]><link rel="stylesheet" href="{{ static_url("css/blueprint/ie.css") }}" type="text/css" media="screen, projection"><![endif]-->
+  <script type="text/javascript" src="{{ static_url("js/jquery-1.4.2.min.js") }}"></script>
+  <script type="text/javascript" src="{{ static_url("js/jquery.tipsy.js") }}"></script>
+  <script type="text/javascript" src="{{ static_url("js/protovis-d3.2.js") }}"></script
+  <script type="text/javascript" src="{{ static_url("js/pv.tipsy.js") }}"></script>
+  <link href="{{ static_url("css/tipsy.css") }}" type="text/css" rel="stylesheet"/>
+  <link rel="stylesheet" href="{{ static_url("css/dashboard.css") }}" type="text/css">
+</head>
+<body>
+  <!-- Container for Blueprint Grid -->
+  <div class="container">
+
+    <!-- Header -->
+    <div class="span-24 last" id="header">
+      <img id="header-logo" src="{{ static_url("img/logo.gif") }}" />
+      <h3 id="header-text">Dogfood Dashboard</h3>
+    </div>
+
+    <!-- Body -->
+    <div class="span-24 last">
+      <h2>4Q2010: CDH Contributor Report</h2>
+
+      <h3>CDH</h3>
+      <table>
+        <tr>
+          <th>Total Issues Fixed</th>
+          <th>Unique Contributors</th>
+        </tr>
+        <tr>
+          <td>{{ unique_contributors[0] }}</td>
+          <td>{{ unique_contributors[1] }}</td>
+        </tr>
+      </table>
+
+      <h3>Unique Contributors Per Component</h3>
+      <table>
+        <tr>
+          <th>Project</th>
+          <th>Total Issues Fixed</th>
+          <th>Unique Contributors</th>
+        </tr>
+        {% for row in unique_contributors_per_project %}
+        <tr><td>{{ row[0] }}</td><td>{{ row[1] }}</td><td>{{ row[2] }}</td></tr>
+        {% end %}
+      </table>
+    </div>
+
+  </div>
+</body>

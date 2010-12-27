@@ -1,0 +1,18 @@
+#header {
+  margin-top:10px;
+  margin-bottom:10px;
+}
+
+#header-logo {
+  float:left;
+  margin-right:10px;
+}
+
+#header-text {
+  color:#999999;
+}
+
+.dashboard-widget {
+  margin-top:10px;
+  margin-bottom:10px;
+}
