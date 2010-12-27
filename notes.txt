@@ -24,3 +24,10 @@
 # Sources: API, web scraping, documents, databases, logfiles
 # Handle escaping in database (let psycopg2 do it for you!)
 # Limitations of sources (e.g. rate limiting by a web service; heavy production workload for OLTP database; result set limitations)
+
+# Add organizations
+ALTER TABLE contributors ADD COLUMN organization text;
+UPDATE contributors SET organization = 'Yahoo!' WHERE asf_email_domain = 'yahoo-inc.com';
+UPDATE contributors SET organization = 'Facebook' WHERE asf_email_domain = 'facebook.com' OR asf_email_domain = 'fb.com';
+UPDATE contributors SET organization = 'Cloudera' WHERE asf_email_domain = 'cloudera.com';
+
