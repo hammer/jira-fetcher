@@ -71,6 +71,23 @@
         </tbody>
       </table>
 
+      <h3>Top Contributors by Project</h3>
+      <table id="top_contributors_by_project_table">
+        <thead>
+        <tr>
+          <th>Project</th>
+          <th>Contributor</th>
+          <th>Organization</th>
+          <th>Fixed Issues</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for row in top_contributors_by_project %}
+        <tr><td>{{ row[0] }}</td><td>{{ row[1] }}</td><td>{{ row[2] }}</td><td>{{ row[3] }}</td></tr>
+        {% end %}
+        </tbody>
+      </table>
+
       <h3>Fixed Issues</h3>
       <table id="fixed_issues_table">
         <thead>

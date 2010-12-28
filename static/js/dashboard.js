@@ -7,6 +7,10 @@ $(document).ready(function() {
     "bPaginate": false,
     "bLengthChange": false,
     "bFilter": false});
+  $('#top_contributors_by_project_table').dataTable({
+    "bPaginate": false,
+    "bLengthChange": false,
+    "bFilter": false});
   $('#fixed_issues_table').dataTable({
     "bPaginate": false,
     "bLengthChange": false,
