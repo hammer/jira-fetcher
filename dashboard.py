@@ -37,7 +37,19 @@ def get_contributors_by_organization():
 
 def get_top_contributors_by_project():
   db_conn = PostgreSQLConnection.make_connection_from_config('POSTGRESQL')
-  sql = "SELECT project, asf_fullname, organization, COUNT(*) FROM fixed_issues a, contributors b WHERE a.assignee = b.asf_name AND updated >= '2010-10-01' GROUP BY project, asf_fullname, organization HAVING COUNT(*) >= 5 ORDER BY project, COUNT(*) DESC;"
+  sql = """\
+SELECT project, asf_fullname, organization, k
+FROM (
+  SELECT project, asf_fullname, organization, k, row_number() OVER (PARTITION BY project ORDER BY k DESC) row_number
+  FROM (
+    SELECT project, asf_fullname, organization, COUNT(*) k
+    FROM fixed_issues a, contributors b
+    WHERE a.assignee = b.asf_name
+    GROUP BY project, asf_fullname, organization
+  ) issues_per_project_per_contributor
+) issues_per_project_per_contributor_with_row_numbers
+WHERE row_number < 6;
+"""
   results = db_conn.fetch_sql(sql)
   db_conn.close()
   return results
